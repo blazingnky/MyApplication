@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    tools:context=".ButtonActivity"
+    android:orientation="vertical"
+    android:padding="0dp"
+    android:paddingBottom="0dp">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button1"
+        android:layout_gravity="center_horizontal"
+        android:background="#ff7c79"
+        android:text="@string/nate_string"
+        android:onClick="onClick" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button2"
+        android:layout_gravity="center_horizontal"
+        android:background="#ffa761"
+        android:text="@string/emergency_string"
+        android:onClick="onClick" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button3"
+        android:layout_gravity="center_horizontal"
+        android:background="#ffe97e"
+        android:text="@string/gallery_string"
+        android:onClick="onClick" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button4"
+        android:layout_gravity="center_horizontal"
+        android:background="#7dacff"
+        android:text="@string/finish_string"
+        android:onClick="onClick" />
+
+</LinearLayout>
