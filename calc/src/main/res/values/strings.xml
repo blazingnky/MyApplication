@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Calc</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="inputString1">첫번째 실수값 입력</string>
+    <string name="inputString2">두번째 실수값 입력</string>
+    <string name="addition_string">더하기</string>
+    <string name="abstraction_string">빼기</string>
+    <string name="multiplication_string">곱하기</string>
+    <string name="division_string">나누기</string>
+    <string name="remainder_string">나머지 값</string>
+</resources>

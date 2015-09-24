@@ -1,0 +1,83 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".CalcActivity"
+    android:orientation="vertical">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number|numberDecimal"
+        android:ems="10"
+        android:id="@+id/inputText1"
+        android:hint="@string/inputString1" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/inputText2"
+        android:hint="@string/inputString2"
+        android:inputType="number|numberDecimal" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/addition_string"
+        android:id="@+id/additionBtn"
+        android:layout_gravity="center_horizontal"
+        android:background="#ff6f7c"
+        android:layout_marginTop="10dp"
+        android:onClick="onClick" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/abstraction_string"
+        android:id="@+id/abstractionBtn"
+        android:layout_gravity="center_horizontal"
+        android:background="#ffa436"
+        android:layout_marginTop="10dp"
+        android:onClick="onClick" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/multiplication_string"
+        android:id="@+id/multiplicationBtn"
+        android:layout_gravity="center_horizontal"
+        android:background="#fffb9b"
+        android:layout_marginTop="10dp"
+        android:onClick="onClick" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/division_string"
+        android:id="@+id/divisionBtn"
+        android:layout_gravity="center_horizontal"
+        android:background="#91ff98"
+        android:layout_marginTop="10dp"
+        android:onClick="onClick" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/remainder_string"
+        android:id="@+id/remainderBtn"
+        android:layout_gravity="center_horizontal"
+        android:background="#a2fbff"
+        android:layout_marginTop="10dp"
+        android:onClick="onClick" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="계산 결과 : "
+        android:id="@+id/clacResult"
+        android:layout_marginTop="30dp"
+        android:textSize="30dp"
+        android:textColor="#ff272a" />
+</LinearLayout>
