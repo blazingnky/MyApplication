@@ -1,0 +1,91 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".ImageActivity"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/selectString"
+        android:id="@+id/selectMessage"
+        android:textSize="20sp"
+        android:textColor="#000000" />
+
+    <Switch
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:text="시작함"
+        android:id="@+id/switch1"
+        android:checked="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="좋아하는 안드로이드 버전은?"
+        android:id="@+id/favoriteMessage"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:visibility="invisible" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/androidSelection"
+        android:visibility="invisible">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/jellybeanString"
+            android:id="@+id/jellybeanButton"
+            android:checked="false"
+            android:visibility="visible"
+            android:onClick="onClick" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/kitkatString"
+            android:id="@+id/kitkatButton"
+            android:checked="false"
+            android:visibility="visible"
+            android:onClick="onClick" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lollipopString"
+            android:id="@+id/lollipopButton"
+            android:checked="false"
+            android:visibility="visible"
+            android:onClick="onClick" />
+
+    </RadioGroup>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/androidImage"
+        android:visibility="invisible"
+        android:onClick="onClick" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/finishString"
+        android:id="@+id/finishButton"
+        android:visibility="invisible"
+        android:onClick="onClick" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/restartString"
+        android:id="@+id/restartButton"
+        android:visibility="invisible"
+        android:onClick="onClick" />
+</LinearLayout>
