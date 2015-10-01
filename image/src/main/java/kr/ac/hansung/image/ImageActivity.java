@@ -104,6 +104,7 @@ public class ImageActivity extends AppCompatActivity {
                 radioGroup.setVisibility(View.INVISIBLE);
                 finishButton.setVisibility(View.INVISIBLE);
                 restartButton.setVisibility(View.INVISIBLE);
+                radioGroup.clearCheck();
                 androidImage.setVisibility(View.INVISIBLE);
                 androidImage.setImageResource(0);
                 aSwitch.setChecked(false);
