@@ -52,7 +52,6 @@ public class CalcActivity extends AppCompatActivity {
         switch (view.getId()){
             case R.id.additionBtn:
                 result.setText("계산 결과 : "+ addition());
-
                 break;
             case R.id.abstractionBtn:
                 result.setText("계산 결과 : "+ abstraction());
