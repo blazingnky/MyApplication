@@ -48,7 +48,6 @@ public class WebViewActivity extends AppCompatActivity {
                     webView.loadUrl(http + urlText.getText().toString());
                 }
 
-
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
             }
