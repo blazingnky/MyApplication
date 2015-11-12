@@ -1,1 +1,1 @@
-include ':app', ':calc', ':button', ':image', ':calc2', ':webview'
+include ':app', ':calc', ':button', ':image', ':calc2', ':webview', ':dialog', ':simplediary'
