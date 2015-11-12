@@ -43,11 +43,25 @@ public class SimpleDiaryActivity extends AppCompatActivity {
         int cMonth = calendar.get(Calendar.MONTH);
         int cDay = calendar.get(Calendar.DAY_OF_MONTH);
 
+
+        fileName = Integer.toString(cYear)+ "_"+Integer.toString(cMonth+1)+"_"+Integer.toString(cDay)+".txt";
+        String str = readDiary(fileName);
+        if(str!=null){
+            editTextDiary.setText(str);
+            btnWrite.setText("수정하기");
+            btnWrite.setEnabled(true);
+        }
+
         datePicker.init(cYear, cMonth, cDay, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 fileName = Integer.toString(year)+ "_"+Integer.toString(monthOfYear+1)+"_"+Integer.toString(dayOfMonth)+".txt";
                 String str = readDiary(fileName);
+                if(str!=null){
+                    editTextDiary.setText(str);
+                    btnWrite.setText("수정하기");
+                    btnWrite.setEnabled(true);
+                }
                 editTextDiary.setText(str);
                 btnWrite.setEnabled(true);
             }
