@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MyDiary</string>
+    <string name="action_settings">Settings</string>
+    <string name="saveString">저장</string>
+</resources>
