@@ -48,7 +48,7 @@ public class SimpleDiaryActivity extends AppCompatActivity {
         String str = readDiary(fileName);
         if(str!=null){
             editTextDiary.setText(str);
-            btnWrite.setText("수정하기");
+            btnWrite.setText("수정");
             btnWrite.setEnabled(true);
         }
 
@@ -59,7 +59,7 @@ public class SimpleDiaryActivity extends AppCompatActivity {
                 String str = readDiary(fileName);
                 if(str!=null){
                     editTextDiary.setText(str);
-                    btnWrite.setText("수정하기");
+                    btnWrite.setText("수정");
                     btnWrite.setEnabled(true);
                 }
                 editTextDiary.setText(str);
@@ -71,7 +71,7 @@ public class SimpleDiaryActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             try{
-                FileOutputStream outFs = openFileOutput(fileName, Context.MODE_WORLD_WRITEABLE);
+                FileOutputStream outFs = openFileOutput(fileName, Context.MODE_PRIVATE);
                 String str = editTextDiary.getText().toString();
                 outFs.write(str.getBytes());
                 outFs.close();
@@ -101,11 +101,11 @@ public class SimpleDiaryActivity extends AppCompatActivity {
             inFs.read(txt);
             inFs.close();
             diaryStr = (new String(txt)).trim();
-            btnWrite.setText("수정하기");
+            btnWrite.setText("수정");
 
         }catch(IOException e){
             editTextDiary.setHint("일기 없음");
-            btnWrite.setText("새로 저장");
+            btnWrite.setText("저장");
        }
         return diaryStr;
     }
