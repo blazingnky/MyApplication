@@ -54,61 +54,64 @@ public class MyDiaryActivity extends AppCompatActivity {
         //디렉터리 생성
         directory =  makeDirectory(DIRECTORY_PATH);
 
+        //오늘 날짜 표시
         dayTextview.setText(Integer.toString(cYear) + "년 " + Integer.toString(cMonth + 1) + "월 " + Integer.toString(cDay) + "일");
 
         //파일 이름 년_월_일.txt
         fileName = Integer.toString(cYear) + "_" + Integer.toString(cMonth + 1) + "_" + Integer.toString(cDay) + ".txt";
 
+        //어플 시작시 오늘 날짜에 해당하는 일기장이 있으면 불러온다
         final String str = readDiary(DIRECTORY_PATH+fileName); // "디렉터리 경로/파일 이름" 완전한 경로를 readDiary에 전달한다.
 
+        //일기장에 내용이 있으면 내용을 출력한다.
         if (str != null) {
             diaryEditText.setText(str);
             saveBtn.setText("수정하기");
             saveBtn.setEnabled(true);
         }
 
-        saveBtn.setOnClickListener(new View.OnClickListener() {
+        saveBtn.setOnClickListener(new View.OnClickListener() {    // 저장버튼 클릭 시
             @Override
             public void onClick(View v) {
-                if(directory.isDirectory()) {
-                    File file = new File(DIRECTORY_PATH+fileName);
+                if(directory.isDirectory()) { //해당 디렉터리가 존재할 때
+                    File file = new File(DIRECTORY_PATH + fileName); //파일생성
                     FileOutputStream fileOutputStream;
 
-                    //디렉터리가 존재하고 파일이 존재하지 않을때,
-                    if(file != null && !file.exists()){
-                        try{
-                            file.createNewFile();
+                    //해당 날짜 일기장이 없을 경우
+                    if (file != null && !file.exists()) {
+                        try {
+                            file.createNewFile();//파일을 디렉터리에 생성
                             fileOutputStream = new FileOutputStream(file);
-                            try{
+                            try {
                                 String str = diaryEditText.getText().toString();
-                                fileOutputStream.write(str.getBytes());
+                                fileOutputStream.write(str.getBytes());//파일에 쓴다.
                                 fileOutputStream.close();
                                 saveBtn.setText("수정하기");
                                 Toast.makeText(getApplicationContext(), fileName + "이 저장됨", Toast.LENGTH_LONG).show();
-                            }catch (IOException e){
+                            } catch (IOException e) {
                                 e.printStackTrace();
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                    }
-                    else if(file.exists() && saveBtn.getText().equals("수정하기")){
-                        try{
+                    }//해당 파일이 존재하는 상태서 수정하기 버튼을 누르면 해당 일기장에 수정된 내용을 덮어 쓴다..
+                    else if (file.exists() && saveBtn.getText().equals("수정하기")) {
+                        try {
                             file.createNewFile();
                             fileOutputStream = new FileOutputStream(file);
-                            try{
+                            try {
                                 String str = diaryEditText.getText().toString();
                                 fileOutputStream.write(str.getBytes());
                                 fileOutputStream.close();
                                 Toast.makeText(getApplicationContext(), fileName + "이 수정됨", Toast.LENGTH_LONG).show();
-                            }catch (IOException e){
+                            } catch (IOException e) {
                                 e.printStackTrace();
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
                     }
-                 }
+                }
             }
         });
     }
@@ -128,8 +131,8 @@ public class MyDiaryActivity extends AppCompatActivity {
         int id = item.getItemId();
 
        switch (id){
-           //크게 버튼을 누를 때마다 글씨크기 3씩 증가, 39이상 증가불가
-           case R.id.bigsize :
+           //크게 버튼을 누를 때마다 글씨크기 5씩 증가, 40이상 증가 불가
+           case R.id.bigsize : //크게
                if(fontSize != 40){
                    fontSize+=5;
                    diaryEditText.setTextSize(fontSize);
@@ -138,11 +141,11 @@ public class MyDiaryActivity extends AppCompatActivity {
                    Toast.makeText(getApplicationContext(), "최대 크기입니다.", Toast.LENGTH_LONG).show();
                break;
            //기본 글씨 크기
-           case R.id.normalsize :
+           case R.id.normalsize : //보통
                fontSize = 20;
                diaryEditText.setTextSize(fontSize);
                break;
-           case R.id.smallsize :
+           case R.id.smallsize : //작게
                if(fontSize!=10){
                    fontSize-=5;
                    diaryEditText.setTextSize(fontSize);
@@ -150,7 +153,7 @@ public class MyDiaryActivity extends AppCompatActivity {
                else
                    Toast.makeText(getApplicationContext(), "최소 크기입니다.", Toast.LENGTH_LONG).show();
                break;
-           case R.id.reread :
+           case R.id.reread : //다시 불러오기
                String str = readDiary(DIRECTORY_PATH + fileName);
                String date = dayTextview.getText().toString();
                if(str != null) {
@@ -159,7 +162,7 @@ public class MyDiaryActivity extends AppCompatActivity {
                }else
                    Toast.makeText(getApplicationContext(), date +"의 일기가 없습니다.", Toast.LENGTH_LONG).show();
                break;
-           case R.id.deletediary :
+           case R.id.deletediary : //삭제하기
                View dialogView = View.inflate(MyDiaryActivity.this, R.layout.delete_dialog, null);
                AlertDialog.Builder dig = new AlertDialog.Builder(MyDiaryActivity.this);
                TextView deleteText = (TextView)dialogView.findViewById(R.id.deleteTextView);
@@ -169,7 +172,7 @@ public class MyDiaryActivity extends AppCompatActivity {
                dig.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialog, int which) {
-                       deleteDiary(DIRECTORY_PATH+fileName);
+                       deleteDiary(DIRECTORY_PATH+fileName); //삭제함수
                    }
                });
                dig.setNegativeButton("닫기", null);
@@ -194,13 +197,13 @@ public class MyDiaryActivity extends AppCompatActivity {
     public String readDiary(String filePath) {
         String diaryStr = null;
         FileInputStream inFs;
-            try {
+            try {   //일기장이 존재하면 해당 날짜 파일에서 읽어 문자열로 리턴
                 inFs = new FileInputStream(filePath);
                 byte[] txt = new byte[500];
                 inFs.read(txt);
                 inFs.close();
                 diaryStr = (new String(txt)).trim();
-            } catch (IOException e) {
+            } catch (IOException e) {   //일기장이 존재하지 않을 때
                 diaryEditText.setHint("일기 없음");
                 saveBtn.setText("저장");
             }
@@ -211,7 +214,7 @@ public class MyDiaryActivity extends AppCompatActivity {
     public void deleteDiary(String filePath){
         diaryEditText.setText(null);
         File deleteFile = new File(filePath);
-        deleteFile.delete();
+        deleteFile.delete(); //파일 삭제
         diaryEditText.setHint("일기 없음");
         saveBtn.setText("저장");
         String date = dayTextview.getText().toString();
@@ -233,12 +236,15 @@ public class MyDiaryActivity extends AppCompatActivity {
                     public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         dayTextview.setText(Integer.toString(year) + "년 " + Integer.toString(monthOfYear + 1) + "월 " + Integer.toString(dayOfMonth) + "일");
 
-                        //날짜가 바뀌면 해당하는 날의 일기 파일이 있는지 확인하기 위해 바뀐 날짜로 fileName을 변경한다.
+                        //날짜가 바뀌면 해당하는 날짜의 일기 파일이 있는지 확인하기 위해 바뀐 날짜로 fileName을 변경한다.
                         fileName = Integer.toString(year) + "_" + Integer.toString(monthOfYear + 1) + "_" + Integer.toString(dayOfMonth) + ".txt";
 
                         //해당 날짜 이름을 가진 파일을 읽는다.
-                        String str = readDiary(DIRECTORY_PATH+fileName);
-                        diaryEditText.setText(str);
+                        String str = readDiary(DIRECTORY_PATH + fileName);
+                        if (str != null) {
+                            diaryEditText.setText(str);
+                            saveBtn.setText("수정하기");
+                        }
                     }
                 });
 
@@ -253,6 +259,7 @@ public class MyDiaryActivity extends AppCompatActivity {
                 });
                 dialog.show();
                 break;
+            default: break;
         }
     }
 }
