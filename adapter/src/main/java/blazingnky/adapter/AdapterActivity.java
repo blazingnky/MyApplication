@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,11 +16,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class AdapterActivity extends AppCompatActivity {
     public Integer[] posterID = { R.drawable.inside, R.drawable.jobs, R.drawable.monster, R.drawable.myungryang, R.drawable.newworld,
+            R.drawable.watchers, R.drawable.assasinate, R.drawable.room7, R.drawable.avengers, R.drawable.inside, R.drawable.jobs, R.drawable.monster, R.drawable.myungryang, R.drawable.newworld,
             R.drawable.watchers, R.drawable.assasinate, R.drawable.room7, R.drawable.avengers};
-    public String [] posterName = {"내부자들", "잡스", "괴물", "명량", "신세계", "감시자들", "암살", "7번방의선물", "어벤저스"};
+    public String [] posterName = {"내부자들", "잡스", "괴물", "명량", "신세계", "감시자들", "암살", "7번방의선물", "어벤저스", "내부자들", "잡스", "괴물", "명량", "신세계", "감시자들", "암살", "7번방의선물", "어벤저스"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,10 +63,16 @@ public class AdapterActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private static class MoviewViewHolder{
+        public ImageView poster;
+        public TextView title;
+    }
+
     public class MyGridAdapter extends BaseAdapter {
-        Context context;
+        private LayoutInflater layoutInflater;
+
         public MyGridAdapter(Context c){
-            context = c;
+            layoutInflater = LayoutInflater.from(c);
         }
 
         @Override
@@ -69,31 +82,43 @@ public class AdapterActivity extends AppCompatActivity {
 
         @Override
         public Object getItem(int position) {
-            return null;
+            return  position;
         }
 
         @Override
         public long getItemId(int position) {
-            return 0;
+            return position;
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            ImageView imageView = new ImageView(context);
-            imageView.setLayoutParams(new GridView.LayoutParams(350, 400));
-            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            imageView.setPadding(5, 5, 5, 5);
+            MoviewViewHolder moviewViewHolder;
+            View view = convertView;
 
-            imageView.setImageResource(posterID[position]);
+            if(view ==null) {
+                view = layoutInflater.inflate(R.layout.grid_item, parent, false);
+
+                moviewViewHolder = new MoviewViewHolder();
+                moviewViewHolder.poster = (ImageView) view.findViewById(R.id.imageView);
+                moviewViewHolder.title = (TextView) view.findViewById(R.id.textView);
+                view.setTag(moviewViewHolder);
+            }
+            else{
+                moviewViewHolder = (MoviewViewHolder)view.getTag();
+            }
+
+            moviewViewHolder.poster.setImageResource(posterID[position]);
+            moviewViewHolder.title.setText(posterName[position]);
 
             final int pos = position;
-            imageView.setOnClickListener(new View.OnClickListener() {
+            moviewViewHolder.poster.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     View dialogView = View.inflate(AdapterActivity.this, R.layout.dialog, null);
                     AlertDialog.Builder dig = new AlertDialog.Builder(AdapterActivity.this);
-                    ImageView ivPoster = (ImageView)dialogView.findViewById(R.id.ivPoster);
+                    ImageView ivPoster = (ImageView) dialogView.findViewById(R.id.ivPoster);
                     ivPoster.setImageResource(posterID[pos]);
+
                     dig.setIcon(R.drawable.movie);
                     dig.setTitle(posterName[pos]);
                     dig.setView(dialogView);
@@ -102,7 +127,7 @@ public class AdapterActivity extends AppCompatActivity {
             }
             });
 
-            return imageView;
+            return view;
         }
     }
 }
