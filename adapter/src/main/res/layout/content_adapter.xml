@@ -9,10 +9,12 @@
     <GridView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
         android:columnCount="4"
         android:id="@+id/gridView1"
         android:gravity="center"
-        android:numColumns="4"></GridView>
+        android:numColumns="4"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="61dp"></GridView>
+
 </RelativeLayout>
